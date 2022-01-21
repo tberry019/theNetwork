@@ -1,21 +1,23 @@
 <template>
-  <h6>welcome to the post page</h6>
-  <img
-    :src="post.postImg"
-    :data-bs-target="'#post-' + post.id"
-    data-bs-toggle="modal"
-    class="rounded selectable post-image"
-    alt=""
-  />
+  <div class="col-md-4 mt-2 rounded">
+    <img
+      :src="post.imgUrl"
+      :data-bs-target="'#post-' + post.id"
+      data-bs-toggle="modal"
+      class="rounded selectable post-image"
+      alt=""
+    />
+  </div>
   <Modal :id="'post-' + post.id">
     <template #modal-title>
-      <h4>{{ post.title }}</h4>
+      <h4>{{ post.creator.name }}</h4>
     </template>
     <template #modal-body>
-      <div class="row cover-image"></div>
+      <div class="row cover-image" :style="{ backgroundImage: coverImg }"></div>
       <div class="row justify-content-center">
+        <h4>{{ post.body }}</h4>
         <h4 class="text-center my-2">Posts</h4>
-        <PostImg v-for="p in post.ostImgs" :key="p.id" :image="p" />
+        <PostImg v-for="p in post.postImgs" :key="p.id" :image="p" />
       </div>
       <div class="row my-3">
         <div class="col-12">
@@ -41,6 +43,8 @@
 
 <script>
 import { computed } from "@vue/reactivity";
+import { useRouter } from "vue-router";
+import { Modal } from "bootstrap";
 export default {
   props: {
     post: {
@@ -49,8 +53,18 @@ export default {
     },
   },
   setup(props) {
+    const router = useRouter();
     return {
-      coverImg: computed(() => `url(${props.post.coverImg})`),
+      async goToProfile() {
+        Modal.getOrCreateInstance(
+          document.getElementById("post-" + props.post.id)
+        ).toggle();
+        router.push({
+          name: "Profile",
+          params: { id: props.post.creatorId },
+        });
+      },
+      coverImg: computed(() => `url('${props.post.creator?.coverImg}')`),
     };
   },
 };
@@ -59,17 +73,22 @@ export default {
 
 <style lang="scss" scoped>
 .post-image {
-  // NOTE the variable used here needs to already be formatted for css before you try to use it here
-  background-image: v-bind(postImg);
+  // background-image: v-bind();
+  background-size: cover;
+  object-fit: contain;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+}
+.cover-image {
+  // background-image: v-bind(coverImg);
   background-size: cover;
   background-repeat: no-repeat;
   height: 50vh;
 }
-.cover-image {
-  // NOTE the variable used here needs to already be formatted for css before you try to use it here
-  background-image: v-bind(coverImg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 50vh;
+
+.creator-image {
+  height: 3rem;
+  width: 3rem;
 }
 </style>

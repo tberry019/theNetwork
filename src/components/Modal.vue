@@ -1,9 +1,7 @@
 <template>
   <div class="modal fade" tabindex="-1">
-    <div class="modal-dialog">
-      NOTE modal-lg?
-      <div class="modal-content">
-        NOTE bg-dark?
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content bg-dark">
         <div class="modal-header">
           <slot name="modal-title"></slot>
           <button

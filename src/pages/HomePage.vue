@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row">
     <Post v-for="p in posts" :key="p.id" :post="p" />
   </div>
 </template>
