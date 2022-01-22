@@ -1,7 +1,8 @@
 <template>
-  <div class="col-12 mt-2 rounded">
+  <div class="col-8 mt-2 mb-3 px-5 rounded">
     <div class="card selectable">
       <img
+        style="max-height: 200px"
         :src="post.imgUrl"
         :data-bs-target="'#post-' + post.id"
         data-bs-toggle="modal"
@@ -23,7 +24,7 @@
       <div class="row cover-image" :style="{ backgroundImage: coverImg }"></div>
       <div class="row justify-content-center">
         <h4>{{ post.body }}</h4>
-        <h4 class="text-center my-2">Posts</h4>
+        <h4 class="text-center my-2">Created By:</h4>
         <PostImg v-for="p in post.postImgs" :key="p.id" :image="p" />
       </div>
       <div class="row my-3">

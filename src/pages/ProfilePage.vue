@@ -1,13 +1,15 @@
 <template>
   <div class="row cover-image"></div>
   <div class="row"></div>
-  <div class="row my-4">
+  <div class="row my-4 text-light">
+    <h1>Welcome {{ account.name }}</h1>
+    <img class="rounded" :src="account.picture" alt="" />
     <div v-if="profile.id == account.id">
       <CreatePost />
     </div>
-  </div>
-  <div class="row mt-4">
-    <Post v-for="p in posts" :key="p.id" :post="p" />
+    <div class="row mt-4">
+      <Post v-for="p in posts" :key="p.id" :post="p" />
+    </div>
   </div>
 </template>
 
