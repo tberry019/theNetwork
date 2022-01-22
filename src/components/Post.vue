@@ -1,12 +1,19 @@
 <template>
-  <div class="col-md-4 mt-2 rounded">
-    <img
-      :src="post.imgUrl"
-      :data-bs-target="'#post-' + post.id"
-      data-bs-toggle="modal"
-      class="rounded selectable post-image"
-      alt=""
-    />
+  <div class="col-12 mt-2 rounded">
+    <div class="card selectable">
+      <img
+        :src="post.imgUrl"
+        :data-bs-target="'#post-' + post.id"
+        data-bs-toggle="modal"
+        class="card-img-top rounded selectable post-image"
+        alt="..."
+        v-if="post.imgUrl"
+      />
+      <div class="card-body">
+        <h4>{{ post.body }}</h4>
+        <p class="card-text"></p>
+      </div>
+    </div>
   </div>
   <Modal :id="'post-' + post.id">
     <template #modal-title>

@@ -10,21 +10,13 @@
         my-3
       "
     >
-      <div class="col-md-4 mb-2">
-        <input
+      <div class="col-12 mb-2">
+        <textarea
           type="text"
           class="form-control"
-          placeholder="Title..."
-          v-model="editable.title"
-          required
-        />
-      </div>
-      <div class="col-md-8 mb-2">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Cover Image..."
-          v-model="editable.coverImg"
+          placeholder="Post Text..."
+          v-model="editable.body"
+          aria-describedby="helpId"
           required
         />
       </div>
@@ -33,9 +25,8 @@
           type="text"
           class="form-control"
           placeholder="Post Images..."
-          v-model="editable.postImgs"
+          v-model="editable.imgUrl"
           aria-describedby="helpId"
-          required
         />
       </div>
       <div class="col-12 d-flex justify-content-end">
@@ -47,6 +38,7 @@
 
 
 <script>
+import { ref } from "@vue/reactivity";
 import { postsService } from "../services/PostsService";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
@@ -57,9 +49,9 @@ export default {
       editable,
       async createPost() {
         try {
-          const formattedImgUrls = editable.value.postImgs
-            .split(", ")
-            .map((url) => url.trim());
+          const formattedImgUrls = editable.value.imgUrl;
+          // .split(", ")
+          // .map((url) => url.trim());
           editable.value.postImgs = formattedImgUrls;
           await postsService.createPost(editable.value);
           editable.value = {};

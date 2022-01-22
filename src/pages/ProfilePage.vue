@@ -1,5 +1,6 @@
 <template>
   <div class="row cover-image"></div>
+  <div class="row"></div>
   <div class="row my-4">
     <div v-if="profile.id == account.id">
       <CreatePost />
@@ -12,10 +13,12 @@
 
 
 <script>
-import { watchEffect } from "@vue/runtime-core";
+import { computed, watchEffect } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { profilesService } from "../services/ProfilesService";
 import { postsService } from "../services/PostsService";
+import { AppState } from "../AppState";
+
 export default {
   setup() {
     const route = useRoute();
@@ -27,7 +30,7 @@ export default {
     });
     return {
       account: computed(() => AppState.account),
-      postss: computed(() => AppState.posts),
+      posts: computed(() => AppState.posts),
       profile: computed(() => AppState.profile),
       coverImg: computed(() => `url(${AppState.profile.coverImg})`),
     };
@@ -42,5 +45,9 @@ export default {
   background-position: center;
   background-size: cover;
   height: 40vh;
+}
+.creator-image {
+  height: 10rem;
+  width: 10rem;
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
   <div class="row">
+    <div>
+      <CreatePost />
+    </div>
     <Post v-for="p in posts" :key="p.id" :post="p" />
   </div>
 </template>
