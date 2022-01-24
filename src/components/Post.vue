@@ -13,23 +13,13 @@
       <div class="card-body">
         <h4>{{ post.body }}</h4>
         <p class="card-text"></p>
+        <!-- FIXME add post.likes.length -->
+        <!-- FIXME @click fire post request to service with url '.../api/posts/:id/like' -->
       </div>
+      <!-- FIXME add creator controlled delete with v-if (see gregslist CarDetailsPage) -->
     </div>
   </div>
-  <!-- <div class="col-3 mt-2 mb-3 px-5 rounded">
-    <img
-      style="max-height: 200px"
-      :src="banners.linkURL"
-      :data-bs-target="'#banners-' + banners.linkURL"
-      data-bs-toggle="card"
-      class="card-img-top rounded selectable banner-linkURL"
-      alt="..."
-    />
-    <div class="card-body">
-      <h4>{{ banners.title }}</h4>
-      <p class="card-text"></p>
-    </div>
-  </div> -->
+
   <Modal :id="'post-' + post.id">
     <template #modal-title>
       <h4>{{ post.creator.name }}</h4>

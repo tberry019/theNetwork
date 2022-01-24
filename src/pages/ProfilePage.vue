@@ -2,8 +2,9 @@
   <div class="row cover-image"></div>
   <div class="row"></div>
   <div class="row my-4 text-light">
-    <h1>Welcome {{ account.name }}</h1>
-    <img class="rounded" :src="account.picture" alt="" />
+    <h1>{{ profile.name }}</h1>
+    <img class="rounded" height="100" :src="profile.picture" alt="" />
+    <!-- FIXME add the profile bio/github link/linkedin/resume -->
     <div v-if="profile.id == account.id">
       <CreatePost />
     </div>
@@ -11,6 +12,7 @@
       <Post v-for="p in posts" :key="p.id" :post="p" />
     </div>
   </div>
+  <!-- FIXME add modal like car edit for edting profile object -->
 </template>
 
 
