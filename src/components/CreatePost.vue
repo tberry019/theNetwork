@@ -32,6 +32,19 @@
       <div class="col-12 d-flex justify-content-end">
         <button class="btn btn-success">Create</button>
       </div>
+      <div class="col-12 mb-2">
+        <textarea
+          type="text"
+          class="form-control"
+          placeholder="Search..."
+          v-model="editable.body"
+          aria-describedby="helpId"
+          required
+        />
+      </div>
+      <div class="col-12 d-flex justify-content-end">
+        <button class="btn btn-info">Search</button>
+      </div>
     </div>
   </form>
 </template>

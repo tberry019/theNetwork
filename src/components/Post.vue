@@ -45,6 +45,14 @@
             <div v-if="post.creator">
               <h4 class="ms-4">{{ post.creator?.name }}</h4>
             </div>
+            <button
+              class="btn btn-danger"
+              type="button"
+              @click="removePost()"
+              v-else
+            >
+              Remove Post
+            </button>
           </div>
         </div>
       </div>
@@ -77,6 +85,18 @@ export default {
         });
       },
       coverImg: computed(() => `url('${props.post.creator?.coverImg}')`),
+
+      async removePost() {
+        try {
+          Modal.getOrCreateInstance(
+            document.getElementById("post-" + props.post.id)
+          ).toggle();
+          await watchlistService.removePosy(props.post);
+        } catch (error) {
+          Pop.toast(error.message, "error");
+          logger.log(error.message);
+        }
+      },
     };
   },
 };

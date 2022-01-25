@@ -4,12 +4,27 @@
   <div class="row my-4 text-light">
     <h1>{{ profile.name }}</h1>
     <img class="rounded" height="100" :src="profile.picture" alt="" />
+
     <!-- FIXME add the profile bio/github link/linkedin/resume -->
     <div v-if="profile.id == account.id">
       <CreatePost />
     </div>
     <div class="row mt-4">
       <Post v-for="p in posts" :key="p.id" :post="p" />
+    </div>
+  </div>
+  <div class="row d-flex">
+    <div class="col-2">
+      <button @click="getMore(newerPosts)" :disabled="!newerPosts">
+        get Newer
+      </button>
+    </div>
+  </div>
+  <div class="row d-flex">
+    <div class="col-2">
+      <button @click="getMore(olderPosts)" :disabled="!olderPosts">
+        get Older
+      </button>
     </div>
   </div>
   <!-- FIXME add modal like car edit for edting profile object -->
