@@ -22,13 +22,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
-        <router-link
-          :to="{ name: 'About' }"
-          class="btn text-success lighten-30 selectable text-uppercase"
-        >
-          About
-        </router-link>
-        <router-link :to="{ name: 'Profile', params: { id: id } }">
+        <router-link :to="{ name: 'Account', params: { id: id } }">
           <div class="btn text-success lighten-30 selectable text-uppercase">
             My Profile
           </div>

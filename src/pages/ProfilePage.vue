@@ -1,9 +1,15 @@
 <template>
   <div class="row cover-image"></div>
-  <div class="row"></div>
+
   <div class="row my-4 text-light">
     <h1>{{ profile.name }}</h1>
-    <img class="rounded" height="100" :src="profile.picture" alt="" />
+    <p>{{ profile.bio }}</p>
+    <p>{{ profile.linkedin }}</p>
+    <p>{{ profile.class }}</p>
+    <p>{{ profile.github }}</p>
+    <p>{{ profile.resume }}</p>
+    <p>Has this user graduated? {{ profile.graduated }}</p>
+    <img class="rounded" height="30" :src="profile.picture" alt="" />
 
     <!-- FIXME add the profile bio/github link/linkedin/resume -->
     <div v-if="profile.id == account.id">
@@ -14,12 +20,15 @@
     </div>
   </div>
   <div class="row d-flex">
+    <div class="col-12"></div>
+
     <div class="col-2">
       <button @click="getMore(newerPosts)" :disabled="!newerPosts">
         get Newer
       </button>
     </div>
   </div>
+
   <div class="row d-flex">
     <div class="col-2">
       <button @click="getMore(olderPosts)" :disabled="!olderPosts">

@@ -13,8 +13,9 @@
       <div class="card-body">
         <h4>{{ post.body }}</h4>
         <p class="card-text"></p>
-        <!-- FIXME add post.likes.length -->
         <!-- FIXME @click fire post request to service with url '.../api/posts/:id/like' -->
+        <p>Created At {{ post.createdAt }}</p>
+        <p>Likes: {{ post.likes.length }}</p>
       </div>
       <!-- FIXME add creator controlled delete with v-if (see gregslist CarDetailsPage) -->
     </div>
@@ -45,15 +46,17 @@
             <div v-if="post.creator">
               <h4 class="ms-4">{{ post.creator?.name }}</h4>
             </div>
-            <button
-              class="btn btn-danger"
-              type="button"
-              @click="removePost()"
-              v-else
-            >
-              Remove Post
-            </button>
           </div>
+        </div>
+        <div class="col-12">
+          <button
+            class="btn btn-danger"
+            v-if="post.creatorId == account.id"
+            type="button"
+            @click="removePost()"
+          >
+            Remove Post
+          </button>
         </div>
       </div>
     </template>
@@ -65,6 +68,10 @@
 import { computed } from "@vue/reactivity";
 import { useRouter } from "vue-router";
 import { Modal } from "bootstrap";
+import { logger } from "../utils/Logger";
+import { postsService } from "../services/PostsService";
+import { AppState } from "../AppState";
+
 export default {
   props: {
     post: {
@@ -85,16 +92,16 @@ export default {
         });
       },
       coverImg: computed(() => `url('${props.post.creator?.coverImg}')`),
+      account: computed(() => AppState.account),
 
-      async removePost() {
+      removePost() {
         try {
           Modal.getOrCreateInstance(
             document.getElementById("post-" + props.post.id)
           ).toggle();
-          await watchlistService.removePosy(props.post);
+          postsService.removePost(props.post.id);
         } catch (error) {
-          Pop.toast(error.message, "error");
-          logger.log(error.message);
+          logger.log(error.message, "modal vue");
         }
       },
     };

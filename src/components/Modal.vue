@@ -22,12 +22,35 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-            Delete
-          </button>
+          <!-- <button
+            type="button"
+            class="btn btn-danger"
+            @click="removePost()"
+            data-bs-dismiss="modal"
+          >
+            Deleterrr
+          </button> -->
         </div>
       </div>
     </div>
   </div>
 </template>
 
+<script>
+import { computed } from "@vue/reactivity";
+import { useRouter } from "vue-router";
+import { Modal } from "bootstrap";
+import { logger } from "../utils/Logger";
+export default {
+  props: {
+    post: {
+      type: Object,
+      required: true,
+    },
+  },
+  setup(props) {
+    const router = useRouter();
+    return {};
+  },
+};
+</script>
